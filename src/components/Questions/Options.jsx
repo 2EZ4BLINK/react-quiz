@@ -2,7 +2,8 @@ import React from "react";
 
 const Options = (props) => {
   const { options, dispatch, answer, correctOptions } = props;
-  const hasAnswer = !!answer;
+  const hasAnswer = answer !== null;
+
   return (
     <div className="options">
       {(options || []).map((option, index) => (

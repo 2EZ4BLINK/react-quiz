@@ -1,6 +1,8 @@
 import { useEffect, useReducer } from "react";
 import { Error, Header, Loader, Main, StartScreen } from "./components";
 import Questions from "./components/Questions/Questions";
+import NextButton from "./components/NextButton";
+import Progress from "./components/Progress";
 
 const initialState = {
   questions: [],
@@ -38,18 +40,28 @@ const reducer = (prevState, action) => {
             ? prevState.points + question.points
             : prevState.points,
       };
+    case "nextQuestion":
+      return {
+        ...prevState,
+        answer: null,
+        index: prevState.index + 1,
+      };
     default:
       throw new Error("Action is unknown");
   }
 };
 
 const App = () => {
-  const [{ questions, status, index, answer }, dispatch] = useReducer(
+  const [{ questions, status, index, answer, points }, dispatch] = useReducer(
     reducer,
     initialState
   );
 
   const numQuestions = questions.length;
+  const maxPossiblePoints = questions.reduce(
+    (prev, cur) => prev + cur.points,
+    0
+  );
 
   useEffect(() => {
     const fetchUser = async () => {
@@ -75,11 +87,21 @@ const App = () => {
           <StartScreen numQuestions={numQuestions} dispatch={dispatch} />
         )}
         {status === "active" && (
-          <Questions
-            answer={answer}
-            dispatch={dispatch}
-            questions={questions[index]}
-          />
+          <>
+            <Progress
+              index={index}
+              points={points}
+              answer={answer}
+              numQuestions={numQuestions}
+              maxPossiblePoints={maxPossiblePoints}
+            />
+            <Questions
+              answer={answer}
+              dispatch={dispatch}
+              questions={questions[index]}
+            />
+            <NextButton dispatch={dispatch} answer={answer} />
+          </>
         )}
       </Main>
     </div>
