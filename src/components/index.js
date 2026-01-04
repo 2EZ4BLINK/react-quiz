@@ -1,5 +1,11 @@
 export { default as Main } from "./Main";
+export { default as Timer } from "./Timer";
 export { default as Error } from "./Error";
 export { default as Loader } from "./Loader";
 export { default as Header } from "./Header";
+export { default as Footer } from "./Footer";
+export { default as Progress } from "./Progress";
+export { default as NextButton } from "./NextButton";
 export { default as StartScreen } from "./StartScreen";
+export { default as Questions } from "./Questions/Questions";
+export { default as FinishedScreen } from "./FinishedScreen";

@@ -5,9 +5,6 @@ const initialState = {
 };
 
 const reducer = (prevState, action) => {
-  console.log("prevState: ", prevState);
-  console.log("action: ", action);
-
   switch (action.type) {
     case "dec":
       return {
