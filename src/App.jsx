@@ -12,7 +12,7 @@ import {
   StartScreen,
   Timer,
 } from "./components";
-import { initialState, SECS_PER_QUESTION } from "./Utils/AppEnums";
+import { initialState, SECS_PER_QUESTION } from "./constants/AppEnums";
 
 const reducer = (prevState, action) => {
   switch (action.type) {
